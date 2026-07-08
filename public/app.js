@@ -7,6 +7,7 @@ const PRINT_POINT_SCALE = 3.52;
 const PERINGODE_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CRESCENT_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
+const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
 const PHOTO_LIMIT_MB = 2;
 const PHOTO_SIZE_ROUNDING_BUFFER_BYTES = 512 * 1024;
 const MAX_PHOTO_BYTES = PHOTO_LIMIT_MB * 1024 * 1024 + PHOTO_SIZE_ROUNDING_BUFFER_BYTES;
@@ -42,6 +43,7 @@ const templates = {
     image: "/assets/templates/template-2.bmp?v=20260704-cherithuruthy-detail-row-align",
     password: "c15",
     options: { bloodGroup: true },
+    divisionOptions: CHERUTHURUTHY_DIVISION_OPTIONS,
     photo: { x: 131, y: 295, w: 393, h: 371, radius: 185.5 },
     fields: {
       studentName: { x: 55, y: 675, w: 563, size: pt(12), weight: 700, align: "center", color: "#000000", transform: "upper" },
@@ -276,6 +278,10 @@ const defaultStudentClassOptions = Array.from(inputs.studentClass.options).map(o
   value: option.value,
   text: option.textContent
 }));
+const defaultDivisionOptions = Array.from(inputs.division.options).map(option => ({
+  value: option.value,
+  text: option.textContent
+}));
 
 function makeCardId() {
   return `ID-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -337,6 +343,7 @@ function applyTemplate() {
   renderEditableHtml(template);
   applyTemplateOptions(template);
   applyClassOptions(template);
+  applyDivisionOptions(template);
   applySchoolLock();
   templateBg.src = template.image;
   const scalePhoto = template.photo;
@@ -392,6 +399,23 @@ function applyClassOptions(template) {
   }
 
   inputs.studentClass.value = classOptions.some(option => option.value === currentValue) ? currentValue : "";
+}
+
+function applyDivisionOptions(template) {
+  const currentValue = inputs.division.value;
+  const divisionOptions = template.divisionOptions
+    ? [{ value: "", text: "Select" }, ...template.divisionOptions.map(value => ({ value, text: value }))]
+    : defaultDivisionOptions;
+  const currentOptions = Array.from(inputs.division.options).map(option => option.value).join("|");
+  const nextOptions = divisionOptions.map(option => option.value).join("|");
+
+  if (currentOptions !== nextOptions) {
+    inputs.division.innerHTML = divisionOptions
+      .map(option => `<option value="${option.value}">${option.text}</option>`)
+      .join("");
+  }
+
+  inputs.division.value = divisionOptions.some(option => option.value === currentValue) ? currentValue : "";
 }
 
 function renderEditableHtml(template) {
