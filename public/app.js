@@ -216,6 +216,21 @@ const templates = {
       place: { x: 162, y: 871, w: 398, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" },
       phone: { x: 162, y: 915, w: 330, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" }
     }
+  },
+  template12: {
+    name: "Govt. High School Pampady",
+    image: "/assets/templates/template-12.bmp?v=20260710-pampady-photo-left-1",
+    password: "p30",
+    options: { admissionNo: false, classDivision: false, dob: false, bloodGroup: false, academicYear: true },
+    photo: { x: 154, y: 272, w: 374, h: 364, radius: 182 },
+    fields: {
+      studentName: { x: 55, y: 688, w: 563, size: pt(13), weight: 700, align: "center", color: "#000000", transform: "upper" },
+      academicYear: { x: 55, y: 746, w: 563, size: pt(8.2), minSize: pt(6.2), weight: 700, align: "center", color: "#000000", prefix: "Academic Year " },
+      guardianName: { x: 190, y: 820, w: 370, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" },
+      houseName: { x: 190, y: 864, w: 370, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" },
+      place: { x: 190, y: 907, w: 370, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" },
+      phone: { x: 190, y: 964, w: 330, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" }
+    }
   }
 };
 
@@ -265,6 +280,7 @@ const inputs = {
   studentClass: document.getElementById("studentClass"),
   division: document.getElementById("division"),
   bloodGroup: document.getElementById("bloodGroup"),
+  academicYear: document.getElementById("academicYear"),
   dobDay: document.getElementById("dobDay"),
   dobMonth: document.getElementById("dobMonth"),
   dobYear: document.getElementById("dobYear"),
@@ -315,6 +331,7 @@ function getFormData() {
     studentClass: inputs.studentClass.value,
     division: inputs.division.value,
     bloodGroup: inputs.bloodGroup.value.trim(),
+    academicYear: inputs.academicYear.value,
     dob: getDobValue(),
     guardianName: titleCase(inputs.guardianName.value),
     houseName: titleCase(inputs.houseName.value),
@@ -352,6 +369,8 @@ function applyTemplate() {
   photoLayer.style.width = percent(scalePhoto.w, TEMPLATE_WIDTH);
   photoLayer.style.height = percent(scalePhoto.h, TEMPLATE_HEIGHT);
   photoLayer.style.borderRadius = scalePhoto.radius ? "50%" : "0";
+  photoLayer.style.border = scalePhoto.stroke ? `${Math.max(1, scalePhoto.strokeWidth * scale)}px solid ${scalePhoto.stroke}` : "";
+  photoLayer.style.boxSizing = "border-box";
   photoLayer.style.clipPath = "";
   photoLayer.style.display = state.croppedPhoto ? "block" : "none";
   photoLayer.src = state.croppedPhoto;
@@ -380,7 +399,9 @@ function applyTemplate() {
 function applyTemplateOptions(template) {
   document.querySelectorAll("[data-template-option]").forEach(node => {
     const option = node.dataset.templateOption;
-    node.classList.toggle("is-hidden", template.options && template.options[option] === false);
+    const hasOption = template.options && Object.prototype.hasOwnProperty.call(template.options, option);
+    const visible = hasOption ? template.options[option] !== false : option !== "academicYear";
+    node.classList.toggle("is-hidden", !visible);
   });
 }
 
@@ -547,19 +568,23 @@ function validateCardDetails() {
   const data = getFormData();
   const required = [
     ["studentName", "Student name"],
-    ["studentClass", "Class"],
-    ["division", "Division"],
     ["guardianName", "Guardian name"],
     ["houseName", "House name"],
     ["place", "Place"],
     ["phone", "Phone"]
   ];
 
+  if (template.fields.studentClass) {
+    required.splice(1, 0, ["studentClass", "Class"], ["division", "Division"]);
+  }
   if (template.fields.admissionNo) {
     required.splice(1, 0, ["admissionNo", "Admission no."]);
   }
   if (template.fields.dob) {
     required.splice(template.fields.admissionNo ? 4 : 3, 0, ["dob", "Date of birth"]);
+  }
+  if (template.fields.academicYear) {
+    required.splice(1, 0, ["academicYear", "Academic year"]);
   }
 
   for (const [key, label] of required) {
@@ -775,6 +800,15 @@ async function renderCardCanvas(options = {}) {
     }
     ctx.drawImage(photo, p.x, p.y, p.w, p.h);
     ctx.restore();
+    if (p.stroke && p.radius) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(p.x + p.w / 2, p.y + p.h / 2, Math.min(p.w, p.h) / 2 - (p.strokeWidth || 1) / 2, 0, Math.PI * 2);
+      ctx.lineWidth = p.strokeWidth || 1;
+      ctx.strokeStyle = p.stroke;
+      ctx.stroke();
+      ctx.restore();
+    }
   }
 
   const data = getFormData();

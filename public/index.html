@@ -52,7 +52,7 @@
               Admission no.
               <input id="admissionNo" name="admissionNo" autocomplete="off" required />
             </label>
-            <label>
+            <label class="optional-field" data-template-option="classDivision">
               Class
               <select id="studentClass" name="studentClass" required>
                 <option value="">Select</option>
@@ -78,7 +78,7 @@
                 <option>Commerce Statistics</option>
               </select>
             </label>
-            <label>
+            <label class="optional-field" data-template-option="classDivision">
               Division
               <select id="division" name="division" required>
                 <option value="">Select</option>
@@ -121,6 +121,14 @@
                   <option value="">Year</option>
                 </select>
               </span>
+            </label>
+            <label class="optional-field" data-template-option="academicYear">
+              Academic year
+              <select id="academicYear" name="academicYear">
+                <option value="">Select</option>
+                <option>2026-2029</option>
+                <option>2026-2030</option>
+              </select>
             </label>
           </div>
 
@@ -290,6 +298,6 @@
       </div>
     </dialog>
 
-    <script src="/app.js?v=20260708-cheruthuruthy-division-k"></script>
+    <script src="/app.js?v=20260710-pampady-photo-left-1"></script>
   </body>
 </html>
