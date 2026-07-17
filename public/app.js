@@ -7,6 +7,7 @@ const PRINT_POINT_SCALE = 3.52;
 const PERINGODE_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CRESCENT_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
+const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
 const PHOTO_LIMIT_MB = 2;
 const PHOTO_SIZE_ROUNDING_BUFFER_BYTES = 512 * 1024;
@@ -230,6 +231,23 @@ const templates = {
       houseName: { x: 190, y: 864, w: 370, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" },
       place: { x: 190, y: 907, w: 370, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" },
       phone: { x: 190, y: 964, w: 330, size: pt(8.8), minSize: pt(6.2), weight: 500, color: "#000000" }
+    }
+  },
+  template13: {
+    name: "AUPS Irumbalasseri",
+    image: "/assets/templates/template-13.bmp?v=20260715-irumbalasseri-align-v5",
+    password: "i31",
+    options: { dob: false, bloodGroup: false },
+    classOptions: IRUMBALASSERI_CLASS_OPTIONS,
+    photo: { x: 136, y: 276, w: 409, h: 394, radius: 197, ellipse: true },
+    fields: {
+      studentName: { x: 82, y: 682, w: 466, size: pt(10.5), minSize: pt(4.2), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
+      studentClass: { x: 138, y: 742, w: 185, size: pt(7.2), minSize: pt(5.4), weight: 600, color: "#000000", prefix: "Class : " },
+      admissionNo: { x: 340, y: 742, w: 215, size: pt(7.2), minSize: pt(5.4), weight: 600, color: "#000000", prefix: "Adm. No : " },
+      guardianName: { x: 186, y: 778, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" },
+      houseName: { x: 186, y: 831, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" },
+      place: { x: 186, y: 883, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" },
+      phone: { x: 186, y: 935, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" }
     }
   }
 };
@@ -795,7 +813,11 @@ async function renderCardCanvas(options = {}) {
     ctx.save();
     if (p.radius) {
       ctx.beginPath();
-      ctx.arc(p.x + p.w / 2, p.y + p.h / 2, Math.min(p.w, p.h) / 2, 0, Math.PI * 2);
+      if (p.ellipse) {
+        ctx.ellipse(p.x + p.w / 2, p.y + p.h / 2, p.w / 2, p.h / 2, 0, 0, Math.PI * 2);
+      } else {
+        ctx.arc(p.x + p.w / 2, p.y + p.h / 2, Math.min(p.w, p.h) / 2, 0, Math.PI * 2);
+      }
       ctx.clip();
     }
     ctx.drawImage(photo, p.x, p.y, p.w, p.h);

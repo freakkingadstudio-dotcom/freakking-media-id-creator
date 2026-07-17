@@ -49,6 +49,10 @@ const sources = [
   {
     input: "C:/Users/shibi/Downloads/pampady.psd",
     output: path.join(__dirname, "..", "public", "assets", "templates", "template-12.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/irumbalasseri.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-13.bmp")
   }
 ];
 
