@@ -235,19 +235,33 @@ const templates = {
   },
   template13: {
     name: "AUPS Irumbalasseri",
-    image: "/assets/templates/template-13.bmp?v=20260715-irumbalasseri-align-v5",
+    image: "/assets/templates/template-13.bmp?v=20260720-irumbalasseri-dob-v1",
     password: "i31",
-    options: { dob: false, bloodGroup: false },
-    classOptions: IRUMBALASSERI_CLASS_OPTIONS,
+    options: { classDivision: false, dob: true, bloodGroup: false },
     photo: { x: 136, y: 276, w: 409, h: 394, radius: 197, ellipse: true },
     fields: {
       studentName: { x: 82, y: 682, w: 466, size: pt(10.5), minSize: pt(4.2), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
-      studentClass: { x: 138, y: 742, w: 185, size: pt(7.2), minSize: pt(5.4), weight: 600, color: "#000000", prefix: "Class : " },
+      dob: { x: 138, y: 742, w: 195, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#000000", prefix: "DOB : " },
       admissionNo: { x: 340, y: 742, w: 215, size: pt(7.2), minSize: pt(5.4), weight: 600, color: "#000000", prefix: "Adm. No : " },
       guardianName: { x: 186, y: 778, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" },
       houseName: { x: 186, y: 831, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" },
       place: { x: 186, y: 883, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" },
       phone: { x: 186, y: 935, w: 300, size: pt(8.6), minSize: pt(6.2), weight: 500, color: "#000000" }
+    }
+  },
+  template14: {
+    name: "Govt. LP School Thozhupadam",
+    image: "/assets/templates/template-14.bmp?v=20260720-thozhupadam-new-v2",
+    password: "t32",
+    options: { classDivision: false, dob: false, bloodGroup: false },
+    photo: { x: 149, y: 297, w: 375, h: 377, radius: 187.5, ellipse: true },
+    fields: {
+      studentName: { x: 70, y: 724, w: 533, size: pt(11), minSize: pt(4.8), weight: 700, align: "center", color: "#000000", transform: "upper" },
+      admissionNo: { x: 70, y: 770, w: 533, size: pt(7.3), minSize: pt(5.2), weight: 600, align: "center", color: "#000000", prefix: "Adm. No : " },
+      guardianName: { x: 175, y: 829, w: 400, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" },
+      houseName: { x: 175, y: 874, w: 400, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" },
+      place: { x: 175, y: 918, w: 400, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" },
+      phone: { x: 175, y: 966, w: 380, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" }
     }
   }
 };
