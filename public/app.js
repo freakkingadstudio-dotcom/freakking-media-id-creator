@@ -9,6 +9,20 @@ const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", 
 const CRESCENT_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
+const POLYTECHNIC_PROGRAMME_OPTIONS = [
+  "ELECTRONICS ENGG.",
+  "COMPUTER ENGG.",
+  "AI & ML ENGG.",
+  "CIVIL ENGG.",
+  "MECHANICAL ENGG.",
+  "COMPUTER HARDWARE ENGG."
+];
+const POLYTECHNIC_ACADEMIC_YEAR_OPTIONS = [
+  { value: "2026-27|MAY 31", text: "2026-27 / MAY 31" },
+  { value: "2026-28|MAY 31", text: "2026-28 / MAY 31" },
+  { value: "2026-29|MAY 31", text: "2026-29 / MAY 31" }
+];
 const PHOTO_LIMIT_MB = 2;
 const PHOTO_SIZE_ROUNDING_BUFFER_BYTES = 512 * 1024;
 const MAX_PHOTO_BYTES = PHOTO_LIMIT_MB * 1024 * 1024 + PHOTO_SIZE_ROUNDING_BUFFER_BYTES;
@@ -223,6 +237,7 @@ const templates = {
     image: "/assets/templates/template-12.bmp?v=20260710-pampady-photo-left-1",
     password: "p30",
     options: { admissionNo: false, classDivision: false, dob: false, bloodGroup: false, academicYear: true },
+    academicYearOptions: PAMPADY_ACADEMIC_YEAR_OPTIONS,
     photo: { x: 154, y: 272, w: 374, h: 364, radius: 182 },
     fields: {
       studentName: { x: 55, y: 688, w: 563, size: pt(13), weight: 700, align: "center", color: "#000000", transform: "upper" },
@@ -262,6 +277,28 @@ const templates = {
       houseName: { x: 175, y: 874, w: 400, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" },
       place: { x: 175, y: 918, w: 400, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" },
       phone: { x: 175, y: 966, w: 380, size: pt(8.5), minSize: pt(5.6), weight: 500, color: "#000000" }
+    }
+  },
+  template15: {
+    name: "Govt. Polytechnic College Chelakkara",
+    image: "/assets/templates/template-15.bmp?v=20260722-polytechnic-v23",
+    password: "g33",
+    options: { classDivision: false, dob: false, bloodGroup: true, programme: true, busRoute: true, academicYear: true },
+    programmeOptions: POLYTECHNIC_PROGRAMME_OPTIONS,
+    academicYearOptions: POLYTECHNIC_ACADEMIC_YEAR_OPTIONS,
+    photo: { x: 159, y: 303, w: 346, h: 346, radius: 173, clipBottomY: 609 },
+    fields: {
+      studentName: { x: 110, y: 629, w: 452, size: pt(11), minSize: pt(4.8), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
+      admissionNo: { x: 164, y: 724, w: 230, size: pt(7), minSize: pt(5.2), weight: 600, color: "#001b3d", prefix: "Adm. No : " },
+      bloodGroup: { x: 385, y: 724, w: 155, size: pt(7), minSize: pt(5.2), weight: 600, color: "#001b3d", prefix: "Blood : " },
+      programme: { x: 85, y: 760, w: 503, size: pt(7), minSize: pt(5.1), weight: 700, align: "center", color: "#001b3d" },
+      guardianName: { x: 164, y: 799, w: 380, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001b3d" },
+      houseName: { x: 164, y: 836, w: 380, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001b3d" },
+      place: { x: 164, y: 873, w: 380, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001b3d" },
+      phone: { x: 164, y: 914, w: 330, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001b3d" },
+      busRoute: { x: 226, y: 991, w: 195, size: pt(6), minSize: pt(4.2), weight: 700, align: "center", color: "#ffffff", transform: "upper" },
+      academicYear: { x: 492, y: 990, w: 132, size: pt(7), minSize: pt(5), weight: 800, align: "center", color: "#001b3d" },
+      academicYearExpiry: { x: 492, y: 1022, w: 132, size: pt(5.8), minSize: pt(4.2), weight: 800, align: "center", color: "#001b3d" }
     }
   }
 };
@@ -313,6 +350,8 @@ const inputs = {
   division: document.getElementById("division"),
   bloodGroup: document.getElementById("bloodGroup"),
   academicYear: document.getElementById("academicYear"),
+  programme: document.getElementById("programme"),
+  busRoute: document.getElementById("busRoute"),
   dobDay: document.getElementById("dobDay"),
   dobMonth: document.getElementById("dobMonth"),
   dobYear: document.getElementById("dobYear"),
@@ -364,6 +403,8 @@ function getFormData() {
     division: inputs.division.value,
     bloodGroup: inputs.bloodGroup.value.trim(),
     academicYear: inputs.academicYear.value,
+    programme: inputs.programme.value,
+    busRoute: inputs.busRoute.value.trim().replace(/\s{2,}/g, " "),
     dob: getDobValue(),
     guardianName: titleCase(inputs.guardianName.value),
     houseName: titleCase(inputs.houseName.value),
@@ -383,6 +424,8 @@ function displayDob(value) {
 function fieldValue(key, data) {
   if (key === "dob") return displayDob(data.dob);
   if (key === "studentClass") return [data.studentClass, data.division].filter(Boolean).join(" ");
+  if (key === "academicYear") return (data.academicYear || "").split("|")[0] || "";
+  if (key === "academicYearExpiry") return (data.academicYear || "").split("|")[1] || "";
   return data[key] || "";
 }
 
@@ -393,6 +436,8 @@ function applyTemplate() {
   applyTemplateOptions(template);
   applyClassOptions(template);
   applyDivisionOptions(template);
+  applyProgrammeOptions(template);
+  applyAcademicYearOptions(template);
   applySchoolLock();
   templateBg.src = template.image;
   const scalePhoto = template.photo;
@@ -403,7 +448,9 @@ function applyTemplate() {
   photoLayer.style.borderRadius = scalePhoto.radius ? "50%" : "0";
   photoLayer.style.border = scalePhoto.stroke ? `${Math.max(1, scalePhoto.strokeWidth * scale)}px solid ${scalePhoto.stroke}` : "";
   photoLayer.style.boxSizing = "border-box";
-  photoLayer.style.clipPath = "";
+  photoLayer.style.clipPath = scalePhoto.clipBottomY
+    ? `inset(0 0 ${Math.max(0, scalePhoto.y + scalePhoto.h - scalePhoto.clipBottomY) * scale}px 0 round 50%)`
+    : "";
   photoLayer.style.display = state.croppedPhoto ? "block" : "none";
   photoLayer.src = state.croppedPhoto;
 
@@ -432,7 +479,8 @@ function applyTemplateOptions(template) {
   document.querySelectorAll("[data-template-option]").forEach(node => {
     const option = node.dataset.templateOption;
     const hasOption = template.options && Object.prototype.hasOwnProperty.call(template.options, option);
-    const visible = hasOption ? template.options[option] !== false : option !== "academicYear";
+    const hiddenByDefault = option === "academicYear" || option === "programme" || option === "busRoute";
+    const visible = hasOption ? template.options[option] !== false : !hiddenByDefault;
     node.classList.toggle("is-hidden", !visible);
   });
 }
@@ -471,6 +519,42 @@ function applyDivisionOptions(template) {
   inputs.division.value = divisionOptions.some(option => option.value === currentValue) ? currentValue : "";
 }
 
+function applyProgrammeOptions(template) {
+  const currentValue = inputs.programme.value;
+  const programmeOptions = template.programmeOptions
+    ? [{ value: "", text: "Select" }, ...template.programmeOptions.map(value => ({ value, text: value }))]
+    : [{ value: "", text: "Select" }];
+  const currentOptions = Array.from(inputs.programme.options).map(option => option.value).join("|");
+  const nextOptions = programmeOptions.map(option => option.value).join("|");
+
+  if (currentOptions !== nextOptions) {
+    inputs.programme.innerHTML = programmeOptions
+      .map(option => `<option value="${option.value}">${option.text}</option>`)
+      .join("");
+  }
+
+  inputs.programme.value = programmeOptions.some(option => option.value === currentValue) ? currentValue : "";
+}
+
+function applyAcademicYearOptions(template) {
+  const currentValue = inputs.academicYear.value;
+  const values = template.academicYearOptions || [];
+  const academicYearOptions = [
+    { value: "", text: "Select" },
+    ...values.map(option => typeof option === "string" ? { value: option, text: option } : option)
+  ];
+  const currentOptions = Array.from(inputs.academicYear.options).map(option => option.value).join("|");
+  const nextOptions = academicYearOptions.map(option => option.value).join("|");
+
+  if (currentOptions !== nextOptions) {
+    inputs.academicYear.innerHTML = academicYearOptions
+      .map(option => `<option value="${option.value}">${option.text}</option>`)
+      .join("");
+  }
+
+  inputs.academicYear.value = academicYearOptions.some(option => option.value === currentValue) ? currentValue : "";
+}
+
 function renderEditableHtml(template) {
   const html = Object.keys(template.fields)
     .map(key => `<span class="card-text card-field-${key}" data-field="${key}"></span>`)
@@ -498,6 +582,7 @@ function renderPreview() {
   inputs.place.value = data.place;
   inputs.phone.value = data.rawPhone;
   inputs.admissionNo.value = data.admissionNo;
+  inputs.busRoute.value = data.busRoute;
 
   const template = templates[state.templateKey];
   const scale = getPreviewScale();
@@ -617,6 +702,12 @@ function validateCardDetails() {
   }
   if (template.fields.academicYear) {
     required.splice(1, 0, ["academicYear", "Academic year"]);
+  }
+  if (template.fields.programme) {
+    required.splice(1, 0, ["programme", "Programme"]);
+  }
+  if (template.fields.busRoute) {
+    required.push(["busRoute", "Bus route"]);
   }
 
   for (const [key, label] of required) {
@@ -833,6 +924,11 @@ async function renderCardCanvas(options = {}) {
         ctx.arc(p.x + p.w / 2, p.y + p.h / 2, Math.min(p.w, p.h) / 2, 0, Math.PI * 2);
       }
       ctx.clip();
+      if (p.clipBottomY) {
+        ctx.beginPath();
+        ctx.rect(p.x, p.y, p.w, p.clipBottomY - p.y);
+        ctx.clip();
+      }
     }
     ctx.drawImage(photo, p.x, p.y, p.w, p.h);
     ctx.restore();
