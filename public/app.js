@@ -8,6 +8,7 @@ const PERINGODE_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI"
 const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CRESCENT_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI"];
+const VARAVOOR_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Humanities", "Commerce Statistics"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
 const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
 const POLYTECHNIC_PROGRAMME_OPTIONS = [
@@ -281,7 +282,7 @@ const templates = {
   },
   template15: {
     name: "Govt. Polytechnic College Chelakkara",
-    image: "/assets/templates/template-15.bmp?v=20260722-polytechnic-v23",
+    image: "/assets/templates/template-15.bmp?v=20260724-polytechnic-footer",
     password: "g33",
     options: { classDivision: false, dob: false, bloodGroup: true, programme: true, busRoute: true, academicYear: true },
     programmeOptions: POLYTECHNIC_PROGRAMME_OPTIONS,
@@ -299,6 +300,59 @@ const templates = {
       busRoute: { x: 226, y: 991, w: 195, size: pt(6), minSize: pt(4.2), weight: 700, align: "center", color: "#ffffff", transform: "upper" },
       academicYear: { x: 492, y: 990, w: 132, size: pt(7), minSize: pt(5), weight: 800, align: "center", color: "#001b3d" },
       academicYearExpiry: { x: 492, y: 1022, w: 132, size: pt(5.8), minSize: pt(4.2), weight: 800, align: "center", color: "#001b3d" }
+    }
+  },
+  template16: {
+    name: "GVHSS Wadakkanchery",
+    image: "/assets/templates/template-16.bmp?v=20260730-wadakkanchery-phone-up-v3",
+    password: "w34",
+    options: { bloodGroup: true, busRoute: true },
+    photo: { x: 175, y: 312, w: 331, h: 324, radius: 162, ellipse: true },
+    fields: {
+      studentName: { x: 130, y: 658, w: 413, size: pt(10.5), minSize: pt(3.8), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
+      admissionNo: { x: 180, y: 710, w: 205, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#001d4e", prefix: "Adm. No : " },
+      studentClass: { x: 390, y: 710, w: 175, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#001d4e", prefix: "Class : " },
+      dob: { x: 180, y: 746, w: 220, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "DOB : " },
+      bloodGroup: { x: 410, y: 746, w: 155, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "Blood : " },
+      busRoute: { x: 180, y: 782, w: 385, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "Bus Route : " },
+      guardianName: { x: 180, y: 852, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
+      houseName: { x: 180, y: 899, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
+      place: { x: 180, y: 940, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
+      phone: { x: 180, y: 984, w: 350, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" }
+    }
+  },
+  template17: {
+    name: "CHSS Chalavara",
+    image: "/assets/templates/template-17.bmp?v=20260804-chss-admission-down-v9",
+    password: "c35",
+    options: { dob: false, bloodGroup: false },
+    photo: { x: 164, y: 316, w: 369, h: 383, radius: 184.5, ellipse: true },
+    fields: {
+      studentName: { x: 70, y: 718, w: 533, size: pt(12), minSize: pt(5), weight: 800, align: "center", color: "#2a0752", transform: "upper" },
+      admissionNo: { x: 70, y: 761, w: 533, size: pt(7.6), minSize: pt(5.4), weight: 600, align: "center", color: "#2a0752", prefix: "Adm. No : " },
+      studentClass: { x: 70, y: 796, w: 533, size: pt(7.6), minSize: pt(5.4), weight: 600, align: "center", color: "#2a0752", prefix: "Class : " },
+      guardianName: { x: 165, y: 846, w: 395, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#1f1234" },
+      houseName: { x: 165, y: 891, w: 395, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#1f1234" },
+      place: { x: 165, y: 936, w: 395, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#1f1234" },
+      phone: { x: 165, y: 981, w: 345, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#1f1234" }
+    }
+  },
+  template18: {
+    name: "Govt. HSS Varavoor",
+    image: "/assets/templates/template-18.bmp?v=20260806-varavoor-classes-v3",
+    password: "v36",
+    options: { dob: false, bloodGroup: true },
+    classOptions: VARAVOOR_CLASS_OPTIONS,
+    photo: { x: 162, y: 323, w: 376, h: 369, radius: 184.5, ellipse: true },
+    fields: {
+      studentName: { x: 70, y: 703, w: 533, size: pt(12), minSize: pt(5), weight: 800, align: "center", color: "#002f61", transform: "upper" },
+      admissionNo: { x: 170, y: 752, w: 220, size: pt(7.2), minSize: pt(5), weight: 600, color: "#002f61", prefix: "Adm. No : " },
+      studentClass: { x: 70, y: 783, w: 533, size: pt(7.2), minSize: pt(5), weight: 600, align: "center", color: "#002f61", prefix: "Class : " },
+      bloodGroup: { x: 410, y: 752, w: 160, size: pt(7.2), minSize: pt(5), weight: 600, color: "#002f61", prefix: "Blood : " },
+      guardianName: { x: 165, y: 812, w: 400, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#002f61" },
+      houseName: { x: 165, y: 859, w: 400, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#002f61" },
+      place: { x: 165, y: 903, w: 400, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#002f61" },
+      phone: { x: 165, y: 951, w: 345, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#002f61" }
     }
   }
 };
