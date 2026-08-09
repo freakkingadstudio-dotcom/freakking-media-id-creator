@@ -377,8 +377,17 @@ const templates = {
   },
   template20: {
     name: "Arafa Charitable Trust",
-    image: "/assets/templates/template-20.bmp?v=20260809-arafa-trust-address-v5",
+    image: "/assets/templates/template-20.bmp?v=20260809-arafa-trust-member-ui-v7",
     password: "a38",
+    labels: {
+      appTitle: "Membership ID Creator",
+      detailsTitle: "Member Details",
+      detailsDescription: "Enter the membership card content and submit.",
+      identityTitle: "Member Identity",
+      school: "Organization",
+      studentName: "Member name",
+      selectedCard: "Selected Membership Card"
+    },
     options: {
       admissionNo: false,
       classDivision: false,
@@ -440,6 +449,13 @@ const cropCtx = cropCanvas.getContext("2d");
 const zoomRange = document.getElementById("zoomRange");
 const photoInput = document.getElementById("photoInput");
 const submitBtn = document.getElementById("submitBtn");
+const creatorTitle = document.getElementById("creatorTitle");
+const detailsTitle = document.getElementById("detailsTitle");
+const detailsDescription = document.getElementById("detailsDescription");
+const identityLabel = document.getElementById("identityLabel");
+const schoolLabel = document.getElementById("schoolLabel");
+const studentNameLabel = document.getElementById("studentNameLabel");
+const selectedCardLabel = document.getElementById("selectedCardLabel");
 
 const inputs = {
   templateKey: document.getElementById("templateKey"),
@@ -538,6 +554,7 @@ function applyTemplate() {
   const scale = getPreviewScale();
   renderEditableHtml(template);
   applyTemplateOptions(template);
+  applyTemplateLabels(template);
   applyClassOptions(template);
   applyDivisionOptions(template);
   applyProgrammeOptions(template);
@@ -578,6 +595,18 @@ function applyTemplate() {
     node.style.textAlign = config.align || "left";
   }
   renderPreview();
+}
+
+function applyTemplateLabels(template) {
+  const labels = template.labels || {};
+  creatorTitle.textContent = labels.appTitle || "Student ID Card Creator";
+  detailsTitle.textContent = labels.detailsTitle || "Student Details";
+  detailsDescription.textContent = labels.detailsDescription || "Enter the card content and submit.";
+  identityLabel.textContent = labels.identityTitle || "Identity";
+  schoolLabel.textContent = labels.school || "School";
+  studentNameLabel.textContent = template.labels?.studentName || "Student name";
+  selectedCardLabel.textContent = labels.selectedCard || "Selected Card";
+  document.title = labels.appTitle || "Student ID Card Creator";
 }
 
 function applyTemplateOptions(template) {
@@ -807,7 +836,7 @@ function validateCardDetails() {
   if (!isSchoolUnlocked()) return "Enter the school password to unlock this template.";
 
   const data = getFormData();
-  const required = [["studentName", "Student name"]];
+  const required = [["studentName", template.labels?.studentName || "Student name"]];
 
   if (template.fields.studentClass) {
     required.splice(1, 0, ["studentClass", "Class"], ["division", "Division"]);
