@@ -138,22 +138,36 @@
               Bus route
               <input id="busRoute" name="busRoute" autocomplete="off" />
             </label>
+            <label class="optional-field" data-template-option="membershipType">
+              Type of membership
+              <select id="membershipType" name="membershipType">
+                <option value="">Select</option>
+                <option>Trust Member</option>
+                <option>Life Member</option>
+                <option>Settler</option>
+                <option>Director</option>
+              </select>
+            </label>
+            <label class="optional-field" data-template-option="membershipNo">
+              Membership no.
+              <input id="membershipNo" name="membershipNo" autocomplete="off" />
+            </label>
           </div>
 
           <div class="field-grid">
-            <label>
+            <label data-template-option="guardianName">
               Guardian name
               <input id="guardianName" name="guardianName" autocomplete="off" required />
             </label>
-            <label>
+            <label data-template-option="houseName">
               House name
               <input id="houseName" name="houseName" autocomplete="off" required />
             </label>
-            <label>
+            <label data-template-option="place">
               Place
               <input id="place" name="place" autocomplete="off" required />
             </label>
-            <label>
+            <label data-template-option="phone">
               Phone
               <span class="phone-input">
                 <span>+91</span>
@@ -306,6 +320,6 @@
       </div>
     </dialog>
 
-    <script src="/app.js?v=20260806-varavoor-classes-v3"></script>
+    <script src="/app.js?v=20260809-arafa-trust-address-v5"></script>
   </body>
 </html>

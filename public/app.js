@@ -9,8 +9,10 @@ const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", 
 const CRESCENT_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI"];
 const VARAVOOR_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Humanities", "Commerce Statistics"];
+const SMT_CHELAKKARA_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
 const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
+const MEMBERSHIP_TYPE_OPTIONS = ["Trust Member", "Life Member", "Settler", "Director"];
 const POLYTECHNIC_PROGRAMME_OPTIONS = [
   "ELECTRONICS ENGG.",
   "COMPUTER ENGG.",
@@ -354,6 +356,50 @@ const templates = {
       place: { x: 165, y: 903, w: 400, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#002f61" },
       phone: { x: 165, y: 951, w: 345, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#002f61" }
     }
+  },
+  template19: {
+    name: "SMT Govt. HSS Chelakkara",
+    image: "/assets/templates/template-19.bmp?v=20260808-smt-chelakkara-details-v4",
+    password: "s37",
+    options: { dob: true, bloodGroup: false },
+    classOptions: SMT_CHELAKKARA_CLASS_OPTIONS,
+    photo: { x: 173, y: 348, w: 327, h: 339, radius: 163.5, ellipse: true },
+    fields: {
+      studentName: { x: 102, y: 708, w: 483, size: pt(11), minSize: pt(4.5), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
+      studentClass: { x: 164, y: 767, w: 176, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#071a46", prefix: "Class : " },
+      admissionNo: { x: 350, y: 767, w: 220, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#071a46", prefix: "Adm. No : " },
+      dob: { x: 164, y: 800, w: 405, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#071a46", prefix: "DOB : " },
+      guardianName: { x: 164, y: 838, w: 405, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#071a46" },
+      houseName: { x: 164, y: 880, w: 405, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#071a46" },
+      place: { x: 164, y: 922, w: 405, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#071a46" },
+      phone: { x: 164, y: 966, w: 350, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#071a46" }
+    }
+  },
+  template20: {
+    name: "Arafa Charitable Trust",
+    image: "/assets/templates/template-20.bmp?v=20260809-arafa-trust-address-v5",
+    password: "a38",
+    options: {
+      admissionNo: false,
+      classDivision: false,
+      dob: false,
+      bloodGroup: false,
+      membershipType: true,
+      membershipNo: true,
+      guardianName: false,
+      houseName: true,
+      place: false,
+      phone: true
+    },
+    membershipTypeOptions: MEMBERSHIP_TYPE_OPTIONS,
+    photo: { x: 164, y: 330, w: 342, h: 359, radius: 171, ellipse: true },
+    fields: {
+      studentName: { x: 70, y: 722, w: 533, size: pt(11), minSize: pt(4.8), weight: 800, align: "center", color: "#001b4d", transform: "upper" },
+      membershipType: { x: 379, y: 773, w: 217, size: pt(6.8), minSize: pt(4.8), weight: 600, color: "#000000", transform: "upper" },
+      membershipNo: { x: 421, y: 804, w: 175, size: pt(6.8), minSize: pt(4.8), weight: 600, color: "#000000", transform: "upper" },
+      houseName: { x: 198, y: 858, w: 410, size: pt(8.5), minSize: pt(8.5), weight: 500, color: "#000000", lines: 3, lineHeight: 1.05, coverHeight: 95, shrinkWrapped: false },
+      phone: { x: 198, y: 955, w: 350, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#000000" }
+    }
   }
 };
 
@@ -406,6 +452,8 @@ const inputs = {
   academicYear: document.getElementById("academicYear"),
   programme: document.getElementById("programme"),
   busRoute: document.getElementById("busRoute"),
+  membershipType: document.getElementById("membershipType"),
+  membershipNo: document.getElementById("membershipNo"),
   dobDay: document.getElementById("dobDay"),
   dobMonth: document.getElementById("dobMonth"),
   dobYear: document.getElementById("dobYear"),
@@ -459,6 +507,8 @@ function getFormData() {
     academicYear: inputs.academicYear.value,
     programme: inputs.programme.value,
     busRoute: inputs.busRoute.value.trim().replace(/\s{2,}/g, " "),
+    membershipType: inputs.membershipType.value,
+    membershipNo: inputs.membershipNo.value.trim().replace(/[^a-z0-9/-]/gi, "").toUpperCase(),
     dob: getDobValue(),
     guardianName: titleCase(inputs.guardianName.value),
     houseName: titleCase(inputs.houseName.value),
@@ -491,6 +541,7 @@ function applyTemplate() {
   applyClassOptions(template);
   applyDivisionOptions(template);
   applyProgrammeOptions(template);
+  applyMembershipTypeOptions(template);
   applyAcademicYearOptions(template);
   applySchoolLock();
   templateBg.src = template.image;
@@ -533,7 +584,7 @@ function applyTemplateOptions(template) {
   document.querySelectorAll("[data-template-option]").forEach(node => {
     const option = node.dataset.templateOption;
     const hasOption = template.options && Object.prototype.hasOwnProperty.call(template.options, option);
-    const hiddenByDefault = option === "academicYear" || option === "programme" || option === "busRoute";
+    const hiddenByDefault = ["academicYear", "programme", "busRoute", "membershipType", "membershipNo"].includes(option);
     const visible = hasOption ? template.options[option] !== false : !hiddenByDefault;
     node.classList.toggle("is-hidden", !visible);
   });
@@ -590,6 +641,23 @@ function applyProgrammeOptions(template) {
   inputs.programme.value = programmeOptions.some(option => option.value === currentValue) ? currentValue : "";
 }
 
+function applyMembershipTypeOptions(template) {
+  const currentValue = inputs.membershipType.value;
+  const membershipTypeOptions = template.membershipTypeOptions
+    ? [{ value: "", text: "Select" }, ...template.membershipTypeOptions.map(value => ({ value, text: value }))]
+    : [{ value: "", text: "Select" }];
+  const currentOptions = Array.from(inputs.membershipType.options).map(option => option.value).join("|");
+  const nextOptions = membershipTypeOptions.map(option => option.value).join("|");
+
+  if (currentOptions !== nextOptions) {
+    inputs.membershipType.innerHTML = membershipTypeOptions
+      .map(option => `<option value="${option.value}">${option.text}</option>`)
+      .join("");
+  }
+
+  inputs.membershipType.value = membershipTypeOptions.some(option => option.value === currentValue) ? currentValue : "";
+}
+
 function applyAcademicYearOptions(template) {
   const currentValue = inputs.academicYear.value;
   const values = template.academicYearOptions || [];
@@ -637,6 +705,7 @@ function renderPreview() {
   inputs.phone.value = data.rawPhone;
   inputs.admissionNo.value = data.admissionNo;
   inputs.busRoute.value = data.busRoute;
+  inputs.membershipNo.value = data.membershipNo;
 
   const template = templates[state.templateKey];
   const scale = getPreviewScale();
@@ -655,6 +724,7 @@ function fitPreviewText(node, config, scale) {
   let size = Math.max(8, config.size * scale);
   const minSize = Math.max(8, (config.minSize || 8) * scale);
   node.style.fontSize = `${size}px`;
+  if (config.lines && config.shrinkWrapped === false) return;
   while ((node.scrollWidth > node.clientWidth || node.scrollHeight > node.clientHeight) && size > minSize) {
     size -= 0.5;
     node.style.fontSize = `${size}px`;
@@ -737,13 +807,7 @@ function validateCardDetails() {
   if (!isSchoolUnlocked()) return "Enter the school password to unlock this template.";
 
   const data = getFormData();
-  const required = [
-    ["studentName", "Student name"],
-    ["guardianName", "Guardian name"],
-    ["houseName", "House name"],
-    ["place", "Place"],
-    ["phone", "Phone"]
-  ];
+  const required = [["studentName", "Student name"]];
 
   if (template.fields.studentClass) {
     required.splice(1, 0, ["studentClass", "Class"], ["division", "Division"]);
@@ -763,11 +827,21 @@ function validateCardDetails() {
   if (template.fields.busRoute) {
     required.push(["busRoute", "Bus route"]);
   }
+  if (template.fields.membershipType) {
+    required.push(["membershipType", "Type of membership"]);
+  }
+  if (template.fields.membershipNo) {
+    required.push(["membershipNo", "Membership no."]);
+  }
+  if (template.fields.guardianName) required.push(["guardianName", "Guardian name"]);
+  if (template.fields.houseName) required.push(["houseName", "House name"]);
+  if (template.fields.place) required.push(["place", "Place"]);
+  if (template.fields.phone) required.push(["phone", "Phone"]);
 
   for (const [key, label] of required) {
     if (!String(data[key]).trim()) return `${label} is required.`;
   }
-  if (!/^\d{10}$/.test(data.rawPhone)) return "Phone must be 10 digits after +91.";
+  if (template.fields.phone && !/^\d{10}$/.test(data.rawPhone)) return "Phone must be 10 digits after +91.";
   if (template.options && template.options.bloodGroup && !data.bloodGroup) return "Blood group is required.";
   if (!state.croppedPhoto) return "Photo is required.";
   return "";
@@ -1032,7 +1106,7 @@ function drawFittedText(ctx, text, config) {
   ctx.fillStyle = config.color;
   ctx.textBaseline = "top";
   ctx.font = `${config.weight || 700} ${size}px ${FONT_FAMILY}`;
-  while (ctx.measureText(text).width > config.w && size > minSize) {
+  while ((!config.lines || config.lines <= 1) && ctx.measureText(text).width > config.w && size > minSize) {
     size -= 0.5;
     ctx.font = `${config.weight || 700} ${size}px ${FONT_FAMILY}`;
   }
@@ -1060,7 +1134,7 @@ function drawFittedText(ctx, text, config) {
 }
 
 function drawWrappedText(ctx, text, config, size) {
-  const fittedSize = fitWrappedCanvasText(ctx, text, config, size);
+  const fittedSize = config.shrinkWrapped === false ? size : fitWrappedCanvasText(ctx, text, config, size);
   if (fittedSize !== size) {
     size = fittedSize;
     ctx.font = `${config.weight || 700} ${size}px ${FONT_FAMILY}`;
