@@ -11,7 +11,7 @@ const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", 
 const VARAVOOR_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Humanities", "Commerce Statistics"];
 const SMT_CHELAKKARA_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
-const GVHSS_WADAKKANCHERY_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Commerce", "Humanities", "Commerce Maths", "Commerce Statistics", "VHSE"];
+const GVHSS_WADAKKANCHERY_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "VHSE"];
 const GVHSS_WADAKKANCHERY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "SLT", "LTPM", "AOPO"];
 const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
 const MEMBERSHIP_TYPE_OPTIONS = ["Trust Member", "Life Member", "Settler", "Director"];
@@ -308,7 +308,7 @@ const templates = {
   },
   template16: {
     name: "GVHSS Wadakkanchery",
-    image: "/assets/templates/template-16.bmp?v=20260730-wadakkanchery-phone-up-v3",
+    image: "/assets/templates/template-16.bmp?v=20260813-wadakkanchery-validity-v4",
     password: "w34",
     options: { bloodGroup: true, busRoute: true },
     classOptions: GVHSS_WADAKKANCHERY_CLASS_OPTIONS,
@@ -316,8 +316,8 @@ const templates = {
     photo: { x: 175, y: 312, w: 331, h: 324, radius: 162, ellipse: true },
     fields: {
       studentName: { x: 130, y: 658, w: 413, size: pt(10.5), minSize: pt(3.8), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
-      admissionNo: { x: 180, y: 710, w: 205, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#001d4e", prefix: "Adm. No : " },
-      studentClass: { x: 390, y: 710, w: 175, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#001d4e", prefix: "Class : " },
+      admissionNo: { x: 180, y: 710, w: 195, size: pt(6.8), minSize: pt(5.2), weight: 600, color: "#001d4e", prefix: "Adm. No : " },
+      studentClass: { x: 375, y: 710, w: 250, size: pt(6.8), minSize: pt(6.8), weight: 600, color: "#001d4e", prefix: "Class : " },
       dob: { x: 180, y: 746, w: 220, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "DOB : " },
       bloodGroup: { x: 410, y: 746, w: 155, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "Blood : " },
       busRoute: { x: 180, y: 782, w: 385, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "Bus Route : " },
