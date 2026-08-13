@@ -11,6 +11,8 @@ const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", 
 const VARAVOOR_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Humanities", "Commerce Statistics"];
 const SMT_CHELAKKARA_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+const GVHSS_WADAKKANCHERY_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Commerce", "Humanities", "Commerce Maths", "Commerce Statistics", "VHSE"];
+const GVHSS_WADAKKANCHERY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "SLT", "LTPM", "AOPO"];
 const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
 const MEMBERSHIP_TYPE_OPTIONS = ["Trust Member", "Life Member", "Settler", "Director"];
 const POLYTECHNIC_PROGRAMME_OPTIONS = [
@@ -309,6 +311,8 @@ const templates = {
     image: "/assets/templates/template-16.bmp?v=20260730-wadakkanchery-phone-up-v3",
     password: "w34",
     options: { bloodGroup: true, busRoute: true },
+    classOptions: GVHSS_WADAKKANCHERY_CLASS_OPTIONS,
+    divisionOptions: GVHSS_WADAKKANCHERY_DIVISION_OPTIONS,
     photo: { x: 175, y: 312, w: 331, h: 324, radius: 162, ellipse: true },
     fields: {
       studentName: { x: 130, y: 658, w: 413, size: pt(10.5), minSize: pt(3.8), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
