@@ -308,7 +308,7 @@ const templates = {
   },
   template16: {
     name: "GVHSS Wadakkanchery",
-    image: "/assets/templates/template-16.bmp?v=20260813-wadakkanchery-validity-v4",
+    image: "/assets/templates/template-16.bmp?v=20260815-wadakkanchery-validity-v5",
     password: "w34",
     options: { bloodGroup: true, busRoute: true },
     classOptions: GVHSS_WADAKKANCHERY_CLASS_OPTIONS,
