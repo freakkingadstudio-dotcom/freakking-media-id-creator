@@ -13,6 +13,7 @@ const SMT_CHELAKKARA_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V",
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
 const GVHSS_WADAKKANCHERY_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "VHSE"];
 const GVHSS_WADAKKANCHERY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "SLT", "LTPM", "AOPO"];
+const PANJAL_08134_CLASS_OPTIONS = ["Computer Science", "Commerce", "Humanities"];
 const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
 const MEMBERSHIP_TYPE_OPTIONS = ["Trust Member", "Life Member", "Settler", "Director"];
 const POLYTECHNIC_PROGRAMME_OPTIONS = [
@@ -419,6 +420,7 @@ const templates = {
     image: "/assets/templates/template-21.bmp?v=20260821-govt-hss-panjal-v1",
     password: "p39",
     options: { bloodGroup: true },
+    classOptions: PANJAL_08134_CLASS_OPTIONS,
     photo: { x: 168, y: 290, w: 356, h: 354, radius: 177, ellipse: true },
     fields: {
       studentName: { x: 65, y: 661, w: 543, size: pt(11), minSize: pt(4.8), weight: 800, align: "center", color: "#003f9d", transform: "upper" },
