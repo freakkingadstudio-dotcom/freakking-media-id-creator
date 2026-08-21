@@ -413,6 +413,24 @@ const templates = {
       houseName: { x: 198, y: 858, w: 410, size: pt(8.5), minSize: pt(8.5), weight: 500, color: "#000000", lines: 3, lineHeight: 1.05, coverHeight: 95, shrinkWrapped: false },
       phone: { x: 198, y: 955, w: 350, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#000000" }
     }
+  },
+  template21: {
+    name: "Govt. HSS Panjal 08134",
+    image: "/assets/templates/template-21.bmp?v=20260821-govt-hss-panjal-v1",
+    password: "p39",
+    options: { bloodGroup: true },
+    photo: { x: 168, y: 290, w: 356, h: 354, radius: 177, ellipse: true },
+    fields: {
+      studentName: { x: 65, y: 661, w: 543, size: pt(11), minSize: pt(4.8), weight: 800, align: "center", color: "#003f9d", transform: "upper" },
+      studentClass: { x: 125, y: 711, w: 423, size: pt(7.4), minSize: pt(5.2), weight: 600, align: "center", color: "#003f9d", prefix: "Class : " },
+      admissionNo: { x: 125, y: 746, w: 423, size: pt(7.4), minSize: pt(5.2), weight: 600, align: "center", color: "#003f9d", prefix: "Adm. No : " },
+      dob: { x: 151, y: 781, w: 245, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#003f9d", prefix: "DOB : " },
+      bloodGroup: { x: 401, y: 781, w: 175, size: pt(7.2), minSize: pt(5.2), weight: 600, color: "#003f9d", prefix: "Blood : " },
+      guardianName: { x: 151, y: 826, w: 420, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" },
+      houseName: { x: 151, y: 869, w: 420, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" },
+      place: { x: 151, y: 908, w: 420, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" },
+      phone: { x: 151, y: 956, w: 365, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" }
+    }
   }
 };
 
