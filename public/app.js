@@ -317,7 +317,7 @@ const templates = {
     divisionOptions: GVHSS_WADAKKANCHERY_DIVISION_OPTIONS,
     photo: { x: 175, y: 312, w: 331, h: 324, radius: 162, ellipse: true },
     fields: {
-      studentName: { x: 130, y: 658, w: 413, size: pt(10.5), minSize: pt(3.8), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
+      studentName: { x: 133, y: 658, w: 413, size: pt(10.5), minSize: pt(3.8), weight: 800, align: "center", color: "#ffffff", transform: "upper" },
       admissionNo: { x: 180, y: 710, w: 195, size: pt(6.8), minSize: pt(5.2), weight: 600, color: "#001d4e", prefix: "Adm. No : " },
       studentClass: { x: 375, y: 710, w: 250, size: pt(6.8), minSize: pt(6.8), weight: 600, color: "#001d4e", prefix: "Class : " },
       dob: { x: 180, y: 746, w: 220, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "DOB : " },
