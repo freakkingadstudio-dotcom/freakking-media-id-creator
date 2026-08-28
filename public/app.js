@@ -323,9 +323,9 @@ const templates = {
       bloodGroup: { x: 410, y: 746, w: 155, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "Blood : " },
       busRoute: { x: 180, y: 782, w: 385, size: pt(7), minSize: pt(5), weight: 600, color: "#001d4e", prefix: "Bus Route : " },
       guardianName: { x: 180, y: 852, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
-      houseName: { x: 180, y: 899, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
-      place: { x: 180, y: 940, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
-      phone: { x: 180, y: 984, w: 350, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" }
+      houseName: { x: 180, y: 897, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
+      place: { x: 180, y: 937, w: 385, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" },
+      phone: { x: 180, y: 980, w: 350, size: pt(8.2), minSize: pt(5.8), weight: 500, color: "#001d4e" }
     }
   },
   template17: {
