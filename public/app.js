@@ -1194,7 +1194,6 @@ function drawFittedText(ctx, text, config) {
 }
 
 function getCanvasTextYOffset() {
-  if (state.templateKey !== "template16") return 0;
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   return isIOS ? IOS_CANVAS_TEXT_Y_OFFSET : 0;
