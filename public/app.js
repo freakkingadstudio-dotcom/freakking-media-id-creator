@@ -3,6 +3,7 @@ const TEMPLATE_HEIGHT = 1063;
 const PDF_WIDTH_PT = (5.7 / 2.54) * 72;
 const PDF_HEIGHT_PT = (9 / 2.54) * 72;
 const FONT_FAMILY = "Poppins, Arial, sans-serif";
+const CARD_FONT_WEIGHTS = [400, 500, 600, 700, 800, 900];
 const PRINT_POINT_SCALE = 3.52;
 const PERINGODE_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
@@ -607,7 +608,7 @@ function applyTemplate() {
     node.style.top = percent(config.y, TEMPLATE_HEIGHT);
     node.style.width = percent(config.w, TEMPLATE_WIDTH);
     node.style.height = `${Math.ceil((config.coverHeight || config.size * (config.lines || 1) * (config.lineHeight || 1.35)) * scale)}px`;
-    node.style.fontSize = `${Math.max(8, config.size * scale)}px`;
+    node.style.fontSize = `${Math.max(1, config.size * scale)}px`;
     node.style.lineHeight = config.lineHeight || 1.08;
     node.style.color = config.color;
     node.style.fontWeight = config.weight || 700;
@@ -774,8 +775,8 @@ function renderPreview() {
 }
 
 function fitPreviewText(node, config, scale) {
-  let size = Math.max(8, config.size * scale);
-  const minSize = Math.max(8, (config.minSize || 8) * scale);
+  let size = Math.max(1, config.size * scale);
+  const minSize = Math.max(1, (config.minSize || 8) * scale);
   node.style.fontSize = `${size}px`;
   if (config.lines && config.shrinkWrapped === false) return;
   while ((node.scrollWidth > node.clientWidth || node.scrollHeight > node.clientHeight) && size > minSize) {
@@ -1082,9 +1083,7 @@ async function renderCardCanvas(options = {}) {
   if (options.syncPreview !== false) {
     renderPreview();
   }
-  if (document.fonts && document.fonts.ready) {
-    await document.fonts.ready;
-  }
+  await ensureCardFonts();
   const canvas = document.createElement("canvas");
   canvas.width = TEMPLATE_WIDTH;
   canvas.height = TEMPLATE_HEIGHT;
@@ -1145,6 +1144,12 @@ async function renderCardCanvas(options = {}) {
   }
 
   return canvas;
+}
+
+async function ensureCardFonts() {
+  if (!document.fonts) return;
+  await Promise.all(CARD_FONT_WEIGHTS.map(weight => document.fonts.load(`${weight} 32px Poppins`)));
+  await document.fonts.ready;
 }
 
 function drawFittedText(ctx, text, config) {
