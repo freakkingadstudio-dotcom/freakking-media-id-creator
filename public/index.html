@@ -28,7 +28,7 @@
       </header>
 
       <section class="workspace">
-        <form class="panel form-panel" id="studentForm" novalidate>
+        <form class="panel form-panel" id="studentForm" autocomplete="off" novalidate>
           <div class="panel-head">
             <div>
               <h2 id="detailsTitle">Student Details</h2>
@@ -46,11 +46,11 @@
           <div class="field-grid">
             <label>
               <span id="studentNameLabel">Student name</span>
-              <input id="studentName" name="studentName" autocomplete="off" required />
+              <input id="studentName" name="studentName" autocomplete="section-student name" autocapitalize="words" autocorrect="off" spellcheck="false" required />
             </label>
             <label class="optional-field" data-template-option="admissionNo">
               Admission no.
-              <input id="admissionNo" name="admissionNo" autocomplete="off" required />
+              <input id="admissionNo" name="admissionNo" autocomplete="section-student one-time-code" autocapitalize="characters" autocorrect="off" spellcheck="false" required />
             </label>
             <label class="optional-field" data-template-option="classDivision">
               Class
@@ -157,21 +157,21 @@
           <div class="field-grid">
             <label data-template-option="guardianName">
               Guardian name
-              <input id="guardianName" name="guardianName" autocomplete="off" required />
+              <input id="guardianName" name="guardianName" autocomplete="section-guardian name" autocapitalize="words" autocorrect="off" spellcheck="false" required />
             </label>
             <label data-template-option="houseName">
               House name
-              <input id="houseName" name="houseName" autocomplete="off" required />
+              <input id="houseName" name="houseName" autocomplete="section-guardian address-line1" autocapitalize="words" autocorrect="off" spellcheck="false" required />
             </label>
             <label data-template-option="place">
               Place
-              <input id="place" name="place" autocomplete="off" required />
+              <input id="place" name="place" autocomplete="section-guardian address-level2" autocapitalize="words" autocorrect="off" spellcheck="false" required />
             </label>
             <label data-template-option="phone">
               Phone
               <span class="phone-input">
                 <span>+91</span>
-                <input id="phone" name="phone" inputmode="numeric" maxlength="10" required />
+                <input id="phone" name="phone" autocomplete="section-guardian tel-national" inputmode="numeric" maxlength="10" required />
               </span>
             </label>
           </div>
@@ -320,6 +320,6 @@
       </div>
     </dialog>
 
-    <script src="/app.js?v=20260828-all-mobile-text-alignment-v22"></script>
+    <script src="/app.js?v=20260828-android-field-mapping-v23"></script>
   </body>
 </html>

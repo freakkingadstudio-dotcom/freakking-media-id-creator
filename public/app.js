@@ -4,7 +4,7 @@ const PDF_WIDTH_PT = (5.7 / 2.54) * 72;
 const PDF_HEIGHT_PT = (9 / 2.54) * 72;
 const FONT_FAMILY = "Poppins, Arial, sans-serif";
 const CARD_FONT_WEIGHTS = [400, 500, 600, 700, 800, 900];
-const MOBILE_CANVAS_TEXT_Y_OFFSET = -8;
+const IOS_CANVAS_TEXT_Y_OFFSET = -8;
 const PRINT_POINT_SCALE = 3.52;
 const PERINGODE_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
@@ -1194,9 +1194,9 @@ function drawFittedText(ctx, text, config) {
 }
 
 function getCanvasTextYOffset() {
-  const isMobileDevice = /Android|iPad|iPhone|iPod|Mobile/i.test(navigator.userAgent) ||
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  return isMobileDevice ? MOBILE_CANVAS_TEXT_Y_OFFSET : 0;
+  return isIOS ? IOS_CANVAS_TEXT_Y_OFFSET : 0;
 }
 
 function drawWrappedText(ctx, text, config, size) {
