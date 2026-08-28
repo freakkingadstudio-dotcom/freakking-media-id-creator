@@ -4,6 +4,7 @@ const PDF_WIDTH_PT = (5.7 / 2.54) * 72;
 const PDF_HEIGHT_PT = (9 / 2.54) * 72;
 const FONT_FAMILY = "Poppins, Arial, sans-serif";
 const CARD_FONT_WEIGHTS = [400, 500, 600, 700, 800, 900];
+const IOS_CANVAS_TEXT_Y_OFFSET = -8;
 const PRINT_POINT_SCALE = 3.52;
 const PERINGODE_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII"];
 const CENTRAL_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
@@ -1156,6 +1157,7 @@ function drawFittedText(ctx, text, config) {
   if (!text) return;
   let size = config.size;
   const minSize = config.minSize || 12;
+  const drawY = config.y + getCanvasTextYOffset();
   const cover = config.cover === false ? "" : config.cover || templates[state.templateKey].cover || "";
   if (cover) {
     ctx.fillStyle = cover;
@@ -1176,19 +1178,26 @@ function drawFittedText(ctx, text, config) {
   }
   if (config.rotate) {
     ctx.save();
-    ctx.translate(config.x, config.y);
+    ctx.translate(config.x, drawY);
     ctx.rotate((config.rotate * Math.PI) / 180);
     const rotatedX = config.align === "center" ? (config.w - ctx.measureText(text).width) / 2 : 0;
     ctx.fillText(text, rotatedX, 0);
     ctx.restore();
-    return { x, y: config.y, width: ctx.measureText(text).width, size };
+    return { x, y: drawY, width: ctx.measureText(text).width, size };
   }
   if (config.lines && config.lines > 1) {
-    drawWrappedText(ctx, text, config, size);
-    return { x: config.x, y: config.y, width: config.w, size };
+    drawWrappedText(ctx, text, { ...config, y: drawY }, size);
+    return { x: config.x, y: drawY, width: config.w, size };
   }
-  ctx.fillText(text, x, config.y);
-  return { x, y: config.y, width: ctx.measureText(text).width, size };
+  ctx.fillText(text, x, drawY);
+  return { x, y: drawY, width: ctx.measureText(text).width, size };
+}
+
+function getCanvasTextYOffset() {
+  if (state.templateKey !== "template16") return 0;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  return isIOS ? IOS_CANVAS_TEXT_Y_OFFSET : 0;
 }
 
 function drawWrappedText(ctx, text, config, size) {
