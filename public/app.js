@@ -13,6 +13,8 @@ const IRUMBALASSERI_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", 
 const VARAVOOR_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "Science", "Humanities", "Commerce Statistics"];
 const SMT_CHELAKKARA_CLASS_OPTIONS = ["LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 const CHERUTHURUTHY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+const CHERUTHURUTHY_HSS_CLASS_OPTIONS = ["Science", "Humanities", "Commerce Statistics", "Commerce Maths"];
+const CHERUTHURUTHY_HSS_DIVISION_OPTIONS = ["A", "B", "C"];
 const GVHSS_WADAKKANCHERY_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "VHSE"];
 const GVHSS_WADAKKANCHERY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "SLT", "LTPM", "AOPO"];
 const PANJAL_08134_CLASS_OPTIONS = ["Computer Science", "Commerce", "Humanities"];
@@ -434,6 +436,25 @@ const templates = {
       houseName: { x: 151, y: 869, w: 420, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" },
       place: { x: 151, y: 908, w: 420, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" },
       phone: { x: 151, y: 956, w: 365, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#003f9d" }
+    }
+  },
+  template22: {
+    name: "GHSS Cheruthuruthy Plus One and Plus Two",
+    image: "/assets/templates/template-22.bmp?v=20260829-cheruthuruthy-hss-v1",
+    password: "p40",
+    options: { bloodGroup: false },
+    classOptions: CHERUTHURUTHY_HSS_CLASS_OPTIONS,
+    divisionOptions: CHERUTHURUTHY_HSS_DIVISION_OPTIONS,
+    photo: { x: 158, y: 405, w: 343, h: 339, radius: 169, ellipse: true },
+    fields: {
+      studentName: { x: 55, y: 753, w: 563, size: pt(10.5), minSize: pt(5), weight: 800, align: "center", color: "#35104d", transform: "upper" },
+      studentClass: { x: 150, y: 811, w: 485, size: pt(6.6), minSize: pt(4.5), weight: 600, color: "#35104d", prefix: "Class : " },
+      admissionNo: { x: 150, y: 785, w: 220, size: pt(6.6), minSize: pt(4.5), weight: 600, color: "#35104d", prefix: "Adm. No : " },
+      dob: { x: 380, y: 785, w: 255, size: pt(6.6), minSize: pt(4.8), weight: 600, color: "#35104d", prefix: "DOB : ", inlineAfter: "admissionNo", inlineGapSpaces: 1 },
+      guardianName: { x: 150, y: 840, w: 410, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
+      houseName: { x: 150, y: 879, w: 410, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
+      place: { x: 150, y: 918, w: 410, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
+      phone: { x: 150, y: 961, w: 350, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" }
     }
   }
 };
