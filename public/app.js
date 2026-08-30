@@ -448,13 +448,13 @@ const templates = {
     photo: { x: 158, y: 405, w: 343, h: 339, radius: 169, ellipse: true },
     fields: {
       studentName: { x: 55, y: 753, w: 563, size: pt(10.5), minSize: pt(5), weight: 800, align: "center", color: "#35104d", transform: "upper" },
-      studentClass: { x: 150, y: 811, w: 485, size: pt(6.6), minSize: pt(4.5), weight: 600, color: "#35104d", prefix: "Class : " },
-      admissionNo: { x: 150, y: 785, w: 220, size: pt(6.6), minSize: pt(4.5), weight: 600, color: "#35104d", prefix: "Adm. No : " },
-      dob: { x: 380, y: 785, w: 255, size: pt(6.6), minSize: pt(4.8), weight: 600, color: "#35104d", prefix: "DOB : ", inlineAfter: "admissionNo", inlineGapSpaces: 1 },
-      guardianName: { x: 150, y: 840, w: 410, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
-      houseName: { x: 150, y: 879, w: 410, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
-      place: { x: 150, y: 918, w: 410, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
-      phone: { x: 150, y: 961, w: 350, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" }
+      studentClass: { x: 160, y: 811, w: 475, size: pt(6.6), minSize: pt(4.5), weight: 600, color: "#35104d", prefix: "Class : " },
+      admissionNo: { x: 160, y: 785, w: 220, size: pt(6.6), minSize: pt(4.5), weight: 600, color: "#35104d", prefix: "Adm. No : " },
+      dob: { x: 390, y: 785, w: 245, size: pt(6.6), minSize: pt(4.8), weight: 600, color: "#35104d", prefix: "DOB : ", inlineAfter: "admissionNo", inlineGapSpaces: 1, inlineOffset: 10 },
+      guardianName: { x: 160, y: 840, w: 400, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
+      houseName: { x: 160, y: 879, w: 400, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
+      place: { x: 160, y: 918, w: 400, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
+      phone: { x: 160, y: 961, w: 340, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" }
     }
   }
 };
@@ -816,7 +816,7 @@ function applyInlinePreviewPositions(template, scale) {
     const anchorConfig = template.fields[config.inlineAfter];
     const anchorWidth = measurePreviewText(anchor);
     const spaceWidth = measurePreviewSpace(anchor, config.inlineGapSpaces || 1);
-    const nextX = anchorConfig.x + (anchorWidth + spaceWidth) / scale;
+    const nextX = anchorConfig.x + (anchorWidth + spaceWidth) / scale + (config.inlineOffset || 0);
     node.style.left = percent(nextX, TEMPLATE_WIDTH);
     node.style.width = percent(Math.max(80, config.x + config.w - nextX), TEMPLATE_WIDTH);
   }
@@ -1154,7 +1154,7 @@ async function renderCardCanvas(options = {}) {
     if (config.inlineAfter && drawnFields[config.inlineAfter]) {
       const anchor = drawnFields[config.inlineAfter];
       ctx.font = `${config.weight || 700} ${config.size}px ${FONT_FAMILY}`;
-      drawConfig.x = anchor.x + anchor.width + ctx.measureText(" ".repeat(config.inlineGapSpaces || 1)).width;
+      drawConfig.x = anchor.x + anchor.width + ctx.measureText(" ".repeat(config.inlineGapSpaces || 1)).width + (config.inlineOffset || 0);
       drawConfig.w = Math.max(80, config.x + config.w - drawConfig.x);
     }
     drawnFields[key] = drawFittedText(ctx, text, drawConfig) || {
