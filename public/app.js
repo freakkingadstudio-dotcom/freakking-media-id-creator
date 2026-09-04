@@ -386,7 +386,7 @@ const templates = {
   },
   template20: {
     name: "Arafa Charitable Trust",
-    image: "/assets/templates/template-20.bmp?v=20260809-arafa-trust-member-ui-v7",
+    image: "/assets/templates/template-20.bmp?v=20260904-arafa-trust-v8",
     password: "a38",
     labels: {
       appTitle: "Membership ID Creator",
@@ -410,11 +410,11 @@ const templates = {
       phone: true
     },
     membershipTypeOptions: MEMBERSHIP_TYPE_OPTIONS,
-    photo: { x: 164, y: 330, w: 342, h: 359, radius: 171, ellipse: true },
+    photo: { x: 152, y: 333, w: 366, h: 365, radius: 182.5, ellipse: true },
     fields: {
       studentName: { x: 70, y: 722, w: 533, size: pt(11), minSize: pt(4.8), weight: 800, align: "center", color: "#001b4d", transform: "upper" },
       membershipType: { x: 379, y: 773, w: 217, size: pt(6.8), minSize: pt(4.8), weight: 600, color: "#000000", transform: "upper" },
-      membershipNo: { x: 421, y: 804, w: 175, size: pt(6.8), minSize: pt(4.8), weight: 600, color: "#000000", transform: "upper" },
+      membershipNo: { x: 421, y: 801, w: 175, size: pt(6.8), minSize: pt(4.8), weight: 600, color: "#000000", transform: "upper" },
       houseName: { x: 198, y: 858, w: 410, size: pt(8.5), minSize: pt(8.5), weight: 500, color: "#000000", lines: 3, lineHeight: 1.05, coverHeight: 95, shrinkWrapped: false },
       phone: { x: 198, y: 955, w: 350, size: pt(8.5), minSize: pt(5.8), weight: 500, color: "#000000" }
     }
