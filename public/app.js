@@ -478,7 +478,7 @@ const templates = {
     photo: { x: 148, y: 381, w: 375, h: 367, radius: 183.5, ellipse: true, preserveAspect: true },
     fields: {
       studentName: { x: 70, y: 775, w: 533, size: pt(10), minSize: pt(5), weight: 800, align: "center", color: "#071a46", transform: "upper" },
-      studentClass: { x: 315, y: 858, w: 290, size: pt(7), minSize: pt(4.8), weight: 600, color: "#071a46" }
+      studentClass: { x: 315, y: 856, w: 290, size: pt(7), minSize: pt(4.8), weight: 600, color: "#071a46" }
     }
   }
 };
