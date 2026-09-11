@@ -18,6 +18,7 @@ const CHERUTHURUTHY_HSS_DIVISION_OPTIONS = ["A", "B", "C"];
 const GVHSS_WADAKKANCHERY_CLASS_OPTIONS = ["PRE KG", "LKG", "UKG", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "VHSE"];
 const GVHSS_WADAKKANCHERY_DIVISION_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "SLT", "LTPM", "AOPO"];
 const PANJAL_08134_CLASS_OPTIONS = ["Computer Science", "Commerce", "Humanities"];
+const ARAFA_BED_OPTION_CHOICES = ["Mathematics", "Natural Science", "Physical Science", "Social Science", "English"];
 const PAMPADY_ACADEMIC_YEAR_OPTIONS = ["2026-2029", "2026-2030"];
 const MEMBERSHIP_TYPE_OPTIONS = ["Trust Member", "Life Member", "Settler", "Director"];
 const POLYTECHNIC_PROGRAMME_OPTIONS = [
@@ -456,6 +457,29 @@ const templates = {
       place: { x: 160, y: 918, w: 400, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" },
       phone: { x: 160, y: 961, w: 340, size: pt(8.4), minSize: pt(5.8), weight: 500, color: "#35104d" }
     }
+  },
+  template23: {
+    name: "Arafa Institute for Teacher Education (B.Ed.)",
+    image: "/assets/templates/template-23.bmp?v=20260911-arafa-bed-v1",
+    password: "a41",
+    labels: { studentClass: "Option" },
+    options: {
+      admissionNo: false,
+      classDivision: true,
+      division: false,
+      dob: false,
+      bloodGroup: false,
+      guardianName: false,
+      houseName: false,
+      place: false,
+      phone: false
+    },
+    classOptions: ARAFA_BED_OPTION_CHOICES,
+    photo: { x: 148, y: 381, w: 375, h: 367, radius: 183.5, ellipse: true, preserveAspect: true },
+    fields: {
+      studentName: { x: 70, y: 775, w: 533, size: pt(10), minSize: pt(5), weight: 800, align: "center", color: "#071a46", transform: "upper" },
+      studentClass: { x: 315, y: 858, w: 290, size: pt(7), minSize: pt(4.8), weight: 600, color: "#071a46" }
+    }
   }
 };
 
@@ -502,6 +526,7 @@ const detailsDescription = document.getElementById("detailsDescription");
 const identityLabel = document.getElementById("identityLabel");
 const schoolLabel = document.getElementById("schoolLabel");
 const studentNameLabel = document.getElementById("studentNameLabel");
+const studentClassLabel = document.getElementById("studentClassLabel");
 const selectedCardLabel = document.getElementById("selectedCardLabel");
 
 const inputs = {
@@ -652,6 +677,7 @@ function applyTemplateLabels(template) {
   identityLabel.textContent = labels.identityTitle || "Identity";
   schoolLabel.textContent = labels.school || "School";
   studentNameLabel.textContent = template.labels?.studentName || "Student name";
+  studentClassLabel.textContent = template.labels?.studentClass || "Class";
   selectedCardLabel.textContent = labels.selectedCard || "Selected Card";
   document.title = labels.appTitle || "Student ID Card Creator";
 }
@@ -659,9 +685,13 @@ function applyTemplateLabels(template) {
 function applyTemplateOptions(template) {
   document.querySelectorAll("[data-template-option]").forEach(node => {
     const option = node.dataset.templateOption;
-    const hasOption = template.options && Object.prototype.hasOwnProperty.call(template.options, option);
+    const suboption = node.dataset.templateSuboption;
+    const resolvedOption = suboption && template.options && Object.prototype.hasOwnProperty.call(template.options, suboption)
+      ? suboption
+      : option;
+    const hasOption = template.options && Object.prototype.hasOwnProperty.call(template.options, resolvedOption);
     const hiddenByDefault = ["academicYear", "programme", "busRoute", "membershipType", "membershipNo"].includes(option);
-    const visible = hasOption ? template.options[option] !== false : !hiddenByDefault;
+    const visible = hasOption ? template.options[resolvedOption] !== false : !hiddenByDefault;
     node.classList.toggle("is-hidden", !visible);
   });
 }
@@ -886,7 +916,10 @@ function validateCardDetails() {
   const required = [["studentName", template.labels?.studentName || "Student name"]];
 
   if (template.fields.studentClass) {
-    required.splice(1, 0, ["studentClass", "Class"], ["division", "Division"]);
+    required.splice(1, 0, ["studentClass", template.labels?.studentClass || "Class"]);
+    if (template.options?.division !== false) {
+      required.splice(2, 0, ["division", "Division"]);
+    }
   }
   if (template.fields.admissionNo) {
     required.splice(1, 0, ["admissionNo", "Admission no."]);
@@ -1132,7 +1165,11 @@ async function renderCardCanvas(options = {}) {
         ctx.clip();
       }
     }
-    ctx.drawImage(photo, p.x, p.y, p.w, p.h);
+    if (p.preserveAspect) {
+      drawImageCover(ctx, photo, p.x, p.y, p.w, p.h);
+    } else {
+      ctx.drawImage(photo, p.x, p.y, p.w, p.h);
+    }
     ctx.restore();
     if (p.stroke && p.radius) {
       ctx.save();
@@ -1166,6 +1203,27 @@ async function renderCardCanvas(options = {}) {
   }
 
   return canvas;
+}
+
+function drawImageCover(ctx, image, x, y, width, height) {
+  const sourceWidth = image.naturalWidth || image.width;
+  const sourceHeight = image.naturalHeight || image.height;
+  const sourceRatio = sourceWidth / sourceHeight;
+  const targetRatio = width / height;
+  let sourceX = 0;
+  let sourceY = 0;
+  let cropWidth = sourceWidth;
+  let cropHeight = sourceHeight;
+
+  if (sourceRatio > targetRatio) {
+    cropWidth = sourceHeight * targetRatio;
+    sourceX = (sourceWidth - cropWidth) / 2;
+  } else if (sourceRatio < targetRatio) {
+    cropHeight = sourceWidth / targetRatio;
+    sourceY = (sourceHeight - cropHeight) / 2;
+  }
+
+  ctx.drawImage(image, sourceX, sourceY, cropWidth, cropHeight, x, y, width, height);
 }
 
 async function ensureCardFonts() {

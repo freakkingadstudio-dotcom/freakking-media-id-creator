@@ -53,7 +53,7 @@
               <input id="admissionNo" name="admissionNo" autocomplete="section-student one-time-code" autocapitalize="characters" autocorrect="off" spellcheck="false" required />
             </label>
             <label class="optional-field" data-template-option="classDivision">
-              Class
+              <span id="studentClassLabel">Class</span>
               <select id="studentClass" name="studentClass" required>
                 <option value="">Select</option>
                 <option>PRE KG</option>
@@ -78,7 +78,7 @@
                 <option>Commerce Statistics</option>
               </select>
             </label>
-            <label class="optional-field" data-template-option="classDivision">
+            <label class="optional-field" data-template-option="classDivision" data-template-suboption="division">
               Division
               <select id="division" name="division" required>
                 <option value="">Select</option>
