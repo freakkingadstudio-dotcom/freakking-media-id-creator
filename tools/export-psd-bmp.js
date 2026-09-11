@@ -61,10 +61,47 @@ const sources = [
   {
     input: "C:/Users/shibi/Downloads/govt-polytechnic-college-chelakkalra.psd",
     output: path.join(__dirname, "..", "public", "assets", "templates", "template-15.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/GVHSS Wadakkanchery.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-16.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/CHSS CHALAVARA.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-17.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/varavoor.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-18.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/SMTGovt.HSS CHELAKKARA.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-19.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/arafa charitable trust.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-20.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/govt hss panjal 08134.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-21.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/ghss cheruthuruthy plus one and plus two.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-22.bmp")
+  },
+  {
+    input: "C:/Users/shibi/Downloads/ARAFA BED.psd",
+    output: path.join(__dirname, "..", "public", "assets", "templates", "template-23.bmp")
   }
 ];
 
+const requestedInput = process.argv[2] ? path.resolve(process.argv[2]) : "";
+
 for (const source of sources) {
+  if (requestedInput && path.resolve(source.input) !== requestedInput) {
+    continue;
+  }
   if (!fs.existsSync(source.input)) {
     console.warn(`Skipped missing source ${source.input}`);
     continue;
